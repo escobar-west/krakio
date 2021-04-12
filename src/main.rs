@@ -44,7 +44,7 @@ fn main() {
     let mem_buff_tx = Arc::clone(&mem_buff_rx);
 
     std::thread::spawn(move || {
-        async_main(pair, delay, tick_tx, mem_buff_tx);
+        connect_to_websocket(pair, delay, tick_tx, mem_buff_tx);
     });
     std::thread::spawn(move || {
         let stdin = io::stdin();
@@ -150,7 +150,7 @@ fn parse_args() -> (String, u64) {
 }
 
 #[tokio::main]
-async fn async_main(
+async fn connect_to_websocket(
     pair: String,
     delay: u64,
     tick_tx: std::sync::mpsc::Sender<Event>,
