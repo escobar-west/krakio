@@ -109,7 +109,7 @@ fn main() {
             }
             Event::Input(key) => {
                 if let Key::Char('q') = key {
-                    std::process::exit(0);
+                    return;
                 }
             }
         }
