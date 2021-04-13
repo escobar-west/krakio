@@ -26,7 +26,7 @@ use tui::{
 
 const _DEPTH_DEFAULT: u16 = 10;
 const _PAIR_DEFAULT: &str = "XBT/USD";
-const _DELAY_DEFAULT: u64 = 100;
+const _DELAY_DEFAULT: u64 = 1;
 type Buff = [(String, f32); _DEPTH_DEFAULT as usize];
 type MemBuff = (Buff, Buff);
 
