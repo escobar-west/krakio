@@ -1,5 +1,5 @@
 # krakio
-(Kind of) async orderbook.
+(Kind of) async orderbook pulled and managed from Kraken public websocket API.
 
 ```cargo run --release [-p PAIR][-m TICK_RATE]```
 
