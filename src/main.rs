@@ -1,5 +1,3 @@
-#![feature(map_first_last)]
-#![feature(option_expect_none)]
 mod lib;
 use crate::lib::{Event, MessageData, OrderBook};
 use futures_util::{FutureExt, SinkExt, StreamExt};
@@ -205,7 +203,10 @@ async fn connect_to_websocket(
                     }
                 }
             } else if let Some(o) = json_data.as_object() {
-                o.get("errorMessage").expect_none("errorMessage");
+                match o.get("errorMessage") {
+                    None => {}
+                    Some(m) => panic!("fatal error occured: {}", m),
+                }
             }
         }
         if alarm_rx.notified().now_or_never().is_some() {

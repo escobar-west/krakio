@@ -1,4 +1,3 @@
-#![feature(map_first_last)]
 use serde::Deserialize;
 use std::collections::BTreeMap;
 use termion::event::Key;
