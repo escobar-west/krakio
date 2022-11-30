@@ -1,7 +1,6 @@
-mod lib;
-use crate::lib::{Event, MessageData, OrderBook};
 use futures_util::{FutureExt, SinkExt, StreamExt};
 use getopts::Options;
+use krakio::{Event, MessageData, OrderBook};
 use serde_json::{json, Value};
 use std::{
     env, io,
@@ -212,8 +211,8 @@ async fn connect_to_websocket(
         if alarm_rx.notified().now_or_never().is_some() {
             let mut mem_lock = mem_buff_tx.lock().unwrap();
             for (i, (bid, ask)) in book.bids.iter().zip(book.asks.iter()).enumerate() {
-                mem_lock.0[i] = (bid.0.to_owned(), *bid.1 as f32);
-                mem_lock.1[i] = (ask.0.to_owned(), *ask.1 as f32);
+                mem_lock.0[i] = (bid.0.to_owned(), *bid.1);
+                mem_lock.1[i] = (ask.0.to_owned(), *ask.1);
             }
             tick_tx.send(Event::Tick).expect("Could not send orderbook");
         }
